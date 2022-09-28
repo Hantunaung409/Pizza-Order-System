@@ -62,6 +62,11 @@
                                 <i class="fa-solid fa-pizza-slice"></i>Products</a>
                         </li>
 
+                        <li>
+                            <a href="{{ route('order@list') }}">
+                                <i class="fa-solid fa-list-check"></i>Order List</a>
+                        </li>
+
                     </ul>
                 </nav>
             </div>
@@ -214,12 +219,12 @@
     <script src="{{ asset('admin/vendor/jquery-3.2.1.min.js') }}"></script>
     <!-- Bootstrap JS-->
     <script src="{{ asset('admin/vendor/bootstrap-4.1/popper.min.js') }}"></script>
-    <script src="{{ asset('admin/') }}vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    {{-- <script src="{{ asset('admin/') }}vendor/bootstrap-4.1/bootstrap.min.js"></script> --}}
     <!-- Vendor JS       -->
     <script src="{{ asset('admin/vendor/slick/slick.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/wow/wow.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/animsition/animsition.min.js') }}"></script>
-    <script src="{{ asset('admin/endor/bootstrap-progressbar/bootstrap-progressbar.min.js') }}v"></script>
+    {{-- <script src="{{ asset('admin/endor/bootstrap-progressbar/bootstrap-progressbar.min.js') }}v"></script> --}}
     <script src="{{ asset('admin/vendor/counter-up/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/counter-up/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/circle-progress/circle-progress.min.js') }}"></script>
@@ -230,7 +235,10 @@
     <!-- Main JS-->
     <script src="{{ asset('admin/js/main.js') }}"></script>
 
-</body>
+    {{-- cdn jquery --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+</body>
+@yield('scriptSource')
 </html>
 <!-- end document-->

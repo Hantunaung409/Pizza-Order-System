@@ -87,18 +87,18 @@ class AdminController extends Controller
         return view('admin.account.list')->with(['accountDeleted' => 'An admin Account was deleted!']);
     }
 
-    //direct change role page
-    public function changeRolePage($id){
-        $account = User::where('id',$id)->first();
-        return view('admin.account.changeRole',compact('account'));
-    }
+    // //direct change role page
+    // public function changeRolePage($id){
+    //     $account = User::where('id',$id)->first();
+    //     return view('admin.account.changeRole',compact('account'));
+    // }
 
-    //change role
-    public function changeRole($id, Request $request){
-        $data = $this->requestChangeRoleData($request);
-        User::where('id',$id)->update($data);
-        return redirect()->route('admin@listPage');
-    }
+    // //change role
+    // public function changeRole($id, Request $request){
+    //     $data = $this->requestChangeRoleData($request);
+    //     User::where('id',$id)->update($data);
+    //     return redirect()->route('admin@listPage');
+    // }
 
 
 

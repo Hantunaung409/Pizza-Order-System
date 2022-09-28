@@ -104,17 +104,16 @@
                                                 @if (Auth::user()->id != $admin->id)
 
                                                     <div class="table-data-feature">
-                                                        <a href=" @if (Auth::user()->id == $admin->id) #  @else {{ route('admin@changeRolePage', $admin->id) }} @endif " class=" me-1">
-                                                        <button class="item" data-toggle="tooltip"
-                                                            data-placement="top" title="Change Role">
-                                                            <i class="fa-solid fa-person-circle-minus"></i>
-                                                        </button>
-                                                    </a>
+                                                        <select name="" id="" class="form-control mr-3 changeRole">
+                                                            <option value="admin">Admin</option>
+                                                            <option value="user">User</option>
+                                                        </select>
                                                         <a href=" @if (Auth::user()->id == $admin->id) #  @else {{ route('admin@delete', $admin->id) }} @endif " class=" me-1">
                                                             <button class="item" data-toggle="tooltip"
                                                                 data-placement="top" title="Delete">
                                                                 <i class="zmdi zmdi-delete"></i>
                                                             </button>
+                                                            <input type="hidden" name="" class="adminId" value="{{ $admin->id }}">
                                                         </a>
                                                     </div>
                                                 @endif
@@ -138,4 +137,26 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scriptSource')
+    <script>
+        $(document).ready(function (){
+           $('.changeRole').change(function (){
+            $role = $(this).val();
+            $adminId = $('.adminId').val();
+
+            $dataSource = {
+              'changeRole' : $role,
+              'adminId' : $adminId
+            };
+            $.ajax({
+                type : 'get',
+                url :  '/admin/ajax/changeRole',
+                data :$dataSource,
+                dataType :'json',
+            })
+            window.location.href = "/admin/listPage";
+           })
+        })
+    </script>
 @endsection

@@ -58,6 +58,16 @@
                                   </button>
                                 </a>
 
+                                <a href="{{ route('user@history') }}">
+                                    <button type="button" class="btn btn-sm btn-light position-relative ml-4">
+                                        <i class="fa-solid fa-clock-rotate-left mr-1"></i>History
+                                      <span
+                                          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                          {{ count($history) }}
+                                      </span>
+                                    </button>
+                                  </a>
+
                             </div>
                             <div class="ml-2">
                                 <div class="btn-group">
@@ -113,7 +123,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <p class=" shadow-sm fs-1 text-center">There is no Pizza<i
+                            <p class=" shadow-sm fs-1 text-center">There is no Product<i
                                     class="fa-solid fa-pizza-slice ms-4"></i></p>
                         @endif
 

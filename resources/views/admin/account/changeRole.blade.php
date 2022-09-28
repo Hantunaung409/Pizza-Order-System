@@ -20,6 +20,7 @@
                             <div class="row">
                                 <form action="{{ route('admin@changeRole',$account->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+                                    <input type="hidden" name="" class="userId" value="{{ $account->id }}">
                                     <div class="row">
                                         <div class=" col-3 offset-1">
                                             @if ($account->image == null)
@@ -48,7 +49,7 @@
                                                 @enderror
 
                                             <label for="role">Role</label>
-                                                <select name="role" id="" class=" form-control">
+                                                <select name="role" id="" class=" form-control role">
                                                    <option value="admin" @if ($account->role == "admin")
                                                        selected
                                                    @endif>Admin</option>
@@ -105,3 +106,5 @@
         </div>
     </div>
 @endsection
+
+

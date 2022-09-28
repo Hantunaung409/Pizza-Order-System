@@ -6,6 +6,7 @@ use Storage;
 use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class UserController extends Controller
         $pizzas = Product::orderBy('created_at','desc')->get();
         $category = Category::get();
         $cart = Cart::where('user_id',Auth::user()->id)->get();
-        return view('user.main.home',compact('pizzas','category','cart'));
+        $history = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('pizzas','category','cart','history'));
     }
 
     //direct user password changing page
@@ -78,7 +80,9 @@ class UserController extends Controller
     public function filter($categoryId){
         $pizzas = Product::where('category_id',$categoryId)->orderBy('created_at','desc')->get();
         $category = Category::get();
-        return view('user.main.home',compact('pizzas','category'));
+        $cart = Cart::where('user_id',Auth::user()->id)->get();
+        $history = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('pizzas','category','cart','history'));
     }
 
     //direct pizza details page
@@ -90,7 +94,7 @@ class UserController extends Controller
 
     //direct cart list page
     public function cartList(){
-        $cartList = Cart::select('carts.*','products.name as productName','products.price as productPrice')
+        $cartList = Cart::select('carts.*','products.name as productName','products.price as productPrice','products.image as product_image')
                       ->leftJoin('products','products.id','carts.product_id')
                       ->where('carts.user_id',Auth::user()->id)
                       ->get();
@@ -101,6 +105,13 @@ class UserController extends Controller
         }
         return view('user.main.cart',compact('cartList','totalPrice'));
     }
+
+    //direct history page
+    public function history(){
+        $order = Order::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->paginate('6');
+        return view('user.main.history',compact('order'));
+    }
+
         // password changing validation
         private function changePasswordValidation($request){
             Validator::make($request->all(),[
