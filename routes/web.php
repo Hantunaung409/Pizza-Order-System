@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\AdminSideUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,10 +80,18 @@ Route::middleware(['auth',config('jetstream.auth_session'),'verified'])->group(f
          Route::prefix('order')->group(function (){
            Route::get('list',[OrderController::class,'list'])->name('order@list');
            Route::get('sort/status',[OrderController::class,'sortWithStatus'])->name('order@SortWithStatus');
+           Route::get('listInfo/{orderCode}',[OrderController::class,'listInfo'])->name('order@listInfo');
            //ajax
            Route::prefix('ajax')->group(function (){
            Route::get('change/status',[OrderController::class,'changeStatus'])->name('order@ajaxChangeStatus');
            });
+         });
+
+         //user List
+         Route::prefix('user')->group(function (){
+            Route::get('list',[AdminSideUserController::class,'list'])->name('admin@userList');
+            Route::get('ajax/change/role',[AdminSideUserController::class,'changeRole'])->name('admin@ajaxChangeRole');
+            Route::get('deleteUser/{id}',[AdminSideUserController::class,'deleteUser'])->name('admin@deleteUser');
          });
         });
     });
@@ -122,6 +131,7 @@ Route::middleware(['auth',config('jetstream.auth_session'),'verified'])->group(f
         Route::get('order',[AjaxController::class,'order'])->name('ajax@order');
         Route::get('clear/cart',[AjaxController::class,'clearCart'])->name('ajax@clearCart');
         Route::get('clear/row',[AjaxController::class,'clearRow'])->name('ajax@clearRow');
+        Route::get('viewCount/increase',[AjaxController::class,'increaseViewCount'])->name('ajax@increaseViewCount');
       });
 
     });

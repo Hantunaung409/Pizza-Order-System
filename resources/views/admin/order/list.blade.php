@@ -19,7 +19,7 @@
                     {{-- Search --}}
                     <div class="row">
                         <div class="col-4">
-                            <h3>Total-({{ $order->total() }})&nbsp;Products</h3>
+                            <h3>Total-({{ $order->total() }})&nbsp;Orders</h3>
                         </div>
                         <div class=" col-4 offset-4">
                             <form action="{{ route('order@list') }}" method="get">
@@ -73,7 +73,7 @@
                             <td>{{ $o->user_id }}</td>
                             <td>{{ $o->user_name }}</td>
                             <td>{{ $o->created_at->format('j-F-Y') }}</td>
-                            <td>{{ $o->order_code }}</td>
+                            <td><a href="{{ route('order@listInfo',$o->order_code) }}" class=" text-decoration-none">{{ $o->order_code }}</a></td>
                             <td>{{ $o->total_price }}&nbsp;MMKs</td>
                             <td>
                                 <select name="status" class="form-control changeStatus">

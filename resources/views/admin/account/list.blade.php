@@ -15,16 +15,6 @@
 
                             </div>
                         </div>
-                        <div class="table-data__tool-right">
-                            <a href="{{ route('category@createPage') }}">
-                                <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                    <i class="zmdi zmdi-plus"></i>Add Category
-                                </button>
-                            </a>
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                CSV download
-                            </button>
-                        </div>
                     </div>
 
                     {{-- alert --}}
@@ -74,6 +64,7 @@
                                         <th>Email</th>
                                         <th>Gender</th>
                                         <th>Phone Address</th>
+                                        <th>Role</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -102,18 +93,25 @@
                                             <td>{{ $admin->phone }}</td>
                                             <td>
                                                 @if (Auth::user()->id != $admin->id)
+                                                    <select name="" id=""
+                                                        class="form-control mr-3 changeRole">
+                                                        <option value="admin">Admin</option>
+                                                        <option value="user">User</option>
+                                                    </select>
+                                                @endif
 
+                                            </td>
+                                            <td>
+                                                @if (Auth::user()->id != $admin->id)
                                                     <div class="table-data-feature">
-                                                        <select name="" id="" class="form-control mr-3 changeRole">
-                                                            <option value="admin">Admin</option>
-                                                            <option value="user">User</option>
-                                                        </select>
-                                                        <a href=" @if (Auth::user()->id == $admin->id) #  @else {{ route('admin@delete', $admin->id) }} @endif " class=" me-1">
+                                                        <a href=" @if (Auth::user()->id == $admin->id) #  @else {{ route('admin@delete', $admin->id) }} @endif "
+                                                            class=" me-1">
                                                             <button class="item" data-toggle="tooltip"
                                                                 data-placement="top" title="Delete">
                                                                 <i class="zmdi zmdi-delete"></i>
                                                             </button>
-                                                            <input type="hidden" name="" class="adminId" value="{{ $admin->id }}">
+                                                            <input type="hidden" name="" class="adminId"
+                                                                value="{{ $admin->id }}">
                                                         </a>
                                                     </div>
                                                 @endif
@@ -140,23 +138,23 @@
 @endsection
 @section('scriptSource')
     <script>
-        $(document).ready(function (){
-           $('.changeRole').change(function (){
-            $role = $(this).val();
-            $adminId = $('.adminId').val();
+        $(document).ready(function() {
+            $('.changeRole').change(function() {
+                $role = $(this).val();
+                $adminId = $('.adminId').val();
 
-            $dataSource = {
-              'changeRole' : $role,
-              'adminId' : $adminId
-            };
-            $.ajax({
-                type : 'get',
-                url :  '/admin/ajax/changeRole',
-                data :$dataSource,
-                dataType :'json',
+                $dataSource = {
+                    'changeRole': $role,
+                    'adminId': $adminId
+                };
+                $.ajax({
+                    type: 'get',
+                    url: '/admin/ajax/changeRole',
+                    data: $dataSource,
+                    dataType: 'json',
+                })
+                window.location.href = "/admin/listPage";
             })
-            window.location.href = "/admin/listPage";
-           })
         })
     </script>
 @endsection

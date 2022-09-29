@@ -34,7 +34,7 @@
                             <small class="fas fa-star-half-alt"></small>
                             <small class="far fa-star"></small>
                         </div>
-                        <small class="pt-1">{{ $pizza->view_count }}<i class="fa-solid fa-eye ms-2" ></i></small>
+                        <small class="pt-1">{{ $pizza->view_count+1 }}<i class="fa-solid fa-eye ms-2" ></i></small>
                     </div>
                     <h3 class="font-weight-semi-bold mb-4">{{ $pizza->price }}MMKs</h3>
                     <p class="mb-4">{{ $pizza->description }}</p>
@@ -126,6 +126,17 @@
 
 @section('scriptSource')
     <script>
+        //increase view count
+        $.ajax({
+            type: 'get',
+            url : '/user/ajax/viewCount/increase',
+            data : {
+                'pizzaId' : $('#pizzaId').val()
+            },
+            dataType : 'json'
+          })
+
+        //add to cart
          $(document).ready(function (){
            $('#addCartbtn').click(function (){
 
