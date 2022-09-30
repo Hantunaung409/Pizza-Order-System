@@ -7,9 +7,11 @@ use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\MessageStatus;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -112,6 +114,31 @@ class UserController extends Controller
         return view('user.main.history',compact('order'));
     }
 
+    //direct contact page
+    public function contactPage(){
+        return view('user.contact.contactPage');
+    }
+
+    //contact data
+    public function contactData(Request $request){
+        $userName = User::where('id',$request->userId)->first();
+        $this->sendMessageValidation($request);
+        $data = Contact::create([
+            'name' => $userName->name,
+            'email' => $request->email,
+            'message' => $request->message,
+            'message_code' => random_int('100000','999999')
+        ]);
+        MessageStatus::create([
+            'name' => $userName->name,
+            'message_code' => $data->message_code
+        ]);
+        return redirect()->route('user@contactPage')->with(['Success' => 'The Message Was Sent!']);
+    }
+
+
+
+
         // password changing validation
         private function changePasswordValidation($request){
             Validator::make($request->all(),[
@@ -145,4 +172,14 @@ class UserController extends Controller
                 'updated_at' => Carbon::now()
             ];
         }
+
+    //Sent message validation
+    private function sendMessageValidation($request){
+        Validator::make($request->all(),[
+            'email' => 'required',
+            'message' => 'required'
+        ])->validate();
+    }
+
+
 }

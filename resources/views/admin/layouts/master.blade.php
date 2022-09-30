@@ -58,18 +58,23 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('products@list') }}">
+                            <a href="{{ route('products@list') }}" class=" text-decoration-none">
                                 <i class="fa-solid fa-pizza-slice"></i>Products</a>
                         </li>
 
                         <li>
-                            <a href="{{ route('order@list') }}">
+                            <a href="{{ route('order@list') }}" class=" text-decoration-none">
                                 <i class="fa-solid fa-list-check"></i>Order List</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin@userList') }}">
+                            <a href="{{ route('admin@userList') }}" class=" text-decoration-none">
                                 <i class="fa-solid fa-users"></i>User List</a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin@messageListPage') }}" class=" text-decoration-none">
+                                <i class="fa-solid fa-users"></i>Messages</a>
+                        </li>
+
 
                     </ul>
                 </nav>
@@ -88,7 +93,7 @@
                                  <h4>Admin Dashboard Pannel</h4>
                             </span>
                             <div class="header-button">
-                                <div class="noti-wrap">
+                                {{-- <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-notifications"></i>
                                         <span class="quantity">3</span>
@@ -128,7 +133,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">

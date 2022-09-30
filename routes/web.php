@@ -5,6 +5,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\UserController;
@@ -93,6 +94,12 @@ Route::middleware(['auth',config('jetstream.auth_session'),'verified'])->group(f
             Route::get('ajax/change/role',[AdminSideUserController::class,'changeRole'])->name('admin@ajaxChangeRole');
             Route::get('deleteUser/{id}',[AdminSideUserController::class,'deleteUser'])->name('admin@deleteUser');
          });
+
+         //message form user
+         Route::get('messageListPage',[ContactController::class,'messageListPage'])->name('admin@messageListPage');
+         Route::get('ajax/message',[ContactController::class,'ajaxMessage'])->name('admin@ajaxMessage');
+         Route::get('message/detail/{message_code}',[ContactController::class,'messageDetail'])->name('admin@messageDetail');
+         Route::get('message/delete/{id}',[ContactController::class,'messageDelete'])->name('admin@messageDelete');
         });
     });
 
@@ -123,6 +130,10 @@ Route::middleware(['auth',config('jetstream.auth_session'),'verified'])->group(f
         Route::post('changeProfile/{id}',[UserController::class,'changeProfile'])->name('user@changeProfile');
 
       });
+
+      //contact
+      Route::get('contact',[UserController::class,'contactPage'])->name('user@contactPage');
+      Route::post('contact',[UserController::class,'contactData'])->name('user@contactData');
 
       //ajax
       Route::prefix('ajax')->group(function (){
