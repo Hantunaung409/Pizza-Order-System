@@ -147,14 +147,5 @@ Route::middleware(['auth',config('jetstream.auth_session'),'verified'])->group(f
 
     });
 
-
-
-
-
-
-
-
-
-
 });
 
