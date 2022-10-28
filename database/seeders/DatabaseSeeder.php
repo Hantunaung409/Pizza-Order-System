@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         'address' => 'Waing Maw',
         'role' => 'admin',
         'gender' => 'male',
-        'password' => Hash::make('Han112854$$$')
+        'password' => Hash::make('AdminHan')
        ]);
     }
 }
