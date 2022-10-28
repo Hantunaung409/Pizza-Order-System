@@ -71,7 +71,7 @@
                                 <tbody>
 
                                     @foreach ($adminList as $admin)
-                                        <tr class="tr-shadow my-2">
+                                                                               <tr class="tr-shadow my-2">
                                             <td class="col-2">
                                                 @if ($admin->image == null)
                                                     @if ($admin->gender == 'male')
@@ -117,6 +117,7 @@
                                                 @endif
                                             </td>
                                         </tr>
+
                                     @endforeach
 
                                 </tbody>

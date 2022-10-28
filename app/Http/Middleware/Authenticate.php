@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             // return redirect('loginPage'); error header may not contain more than one line
-            return route('auth@loginPage');
+            return route('notAuthenticate');
         }
     }
 }

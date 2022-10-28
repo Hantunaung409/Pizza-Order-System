@@ -71,13 +71,14 @@ class AdminController extends Controller
    //direct admin lists
         public function listPage(){
             $adminList = User::when(request('key'),function ($query){
-                                $query->orWhere('name','like','%'.request('key').'%')
-                                      ->orWhere('email','like','%'.request('key').'%')
-                                      ->orWhere('gender','like','%'.request('key').'%')
-                                      ->orWhere('phone','like','%'.request('key').'%')
-                                      ->orWhere('address','like','%'.request('key').'%');
+                                $query->orWhere('name','like','%'.request('key').'%')->where('role','admin')
+                                      ->orWhere('email','like','%'.request('key').'%')->where('role','admin')
+                                      ->orWhere('gender','like','%'.request('key').'%')->where('role','admin')
+                                      ->orWhere('phone','like','%'.request('key').'%')->where('role','admin')
+                                      ->orWhere('address','like','%'.request('key').'%')->where('role','admin');
                                })
-                               ->where('role','admin')->paginate(4);
+                               ->where('role','admin')
+                               ->paginate(4);
             return view('admin.account.list',compact('adminList'));
         }
 
